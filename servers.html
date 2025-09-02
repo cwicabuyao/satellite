@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CWI-CABUYAO</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      color: #222;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      background: #0f172a;
+      color: white;
+      padding: 10px 05px;
+    }
+    .header-left {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .header-left img {
+      height: 85px;
+      width: auto;
+    }
+    .header-info {
+      font-size: 13px;
+      line-height: 1.4;
+    }
+    .header-info strong {
+      display: block;
+      font-size: 18px;
+    }
+    .header-time {
+      text-align: right;
+      align-items: right;
+      font-size: 17px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    /* Red Dashboard Bar */
+    .dashboard-bar {
+      background: #0c2d48;
+      color: white;
+      padding: 12px;
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+
+    /* Menu Button */
+    .menu-btn {
+      background: #c1121f;
+      color: white;
+      padding: 08px 08px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* Side Menu */
+    .side-menu {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: #1e1e1e;
+      overflow-x: hidden;
+      transition: 0.3s;
+      padding-top: 60px;
+      z-index: 1000;
+    }
+    .side-menu a {
+      padding: 12px 25px;
+      text-decoration: none;
+      font-size: 18px;
+      color: white;
+      display: block;
+      transition: 0.3s;
+    }
+    .side-menu a:hover {
+      background: #333;
+    }
+    .side-menu .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 30px;
+      cursor: pointer;
+      color: white;
+    }
+
+    /* Footer */
+    .footer {
+      font-size: 13px;
+      text-align: center;
+      padding: 20px;
+      margin-top: 50px;
+      background: #f1f1f1;
+      border-top: 1px solid #ccc;
+      line-height: 1.6;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header {
+        text-align: center;
+        flex-direction: column;
+      }
+      .header-left {
+        justify-content: center;
+      }
+      .header-time {
+        text-align: center;
+        margin-top: 05px;
+      }
+      .dashboard-bar {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-left">
+      <img src="logo1.png" alt="Logo 1">
+      <img src="logo2.png" alt="Logo 2">
+      <div class="header-info">
+        <strong>CABUYAO CITY WEATHER INFORMATION</strong>
+        PROVINCE OF LAGUNA, PHILIPPINES<br>
+        information.cwicabuyao.gov.ph@gmail.com
+      </div>
+    </div>
+    <div class="header-time">
+      <div id="date"></div>
+      <div id="time"></div>
+    </div>
+  </div>
+
+  <!-- Menu Button -->
+  <div class="menu-btn" onclick="openMenu()"> ☰ Menu | ⚠ SOUTWEST MOONSOON (HABAGAT) </div>
+
+  <!-- Side Menu -->
+  <div id="sideMenu" class="side-menu">
+    <a href="javascript:void(0)" class="close-btn" onclick="closeMenu()">&times;</a>
+    <a href="#">12H WEATHER</a>
+    <a href="#">CLIMATE</a>
+    <a href="#">HYROLOGICAL</a>
+    <a href="#">ASTRO</a>
+  </div>
+
+  <!-- Dashboard Bar -->
+  <div class="dashboard-bar">COMMAND MONITORING DASHBOARD</div>
+  
+  
+<div class="wrap">
+  <div class="header">
+    <div class="label">PAGASA HIMAWARI-9 SATELLITE IMAGERY</div>
+    <select id="sourceSelect">
+      <option value="" disabled selected>SELECT A TYPE OF PRODUCT</option>
+      <option value="http://src.meteopilipinas.gov.ph/repo/mtsat-colored/24hour/latest-him-colored.gif">
+        HIMAWARI-9 IR1 24H
+      </option>
+      <option value="https://src.meteopilipinas.gov.ph/repo/mtsat-colored/24hour/latest-him-colored-hourly.gif">
+        HIMAWARI-9 IR1 HOURLY
+      </option>
+      <option value="https://src.meteopilipinas.gov.ph/repo/himawari/24hour/irsml/latestHIM_irsml.gif">
+        HIMAWARI-9 IRSML 24H
+      </option>
+      <option value="https://src.meteopilipinas.gov.ph/repo/himawari/24hour/visbig/latestHIM_visbig.gif">
+        HIMAWARI-9 VISIBLE 24H
+      </option>
+    </select>
+  </div>
+
+  <div class="viewer">
+    <img id="viewer" src="" alt="Select a product to view" style="display:none;">
+  </div>
+</div>
+
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 70%;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    background: #0f172a;;
+  }
+
+  .wrap {
+    display: auto;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
+
+  .header {
+    width: 95%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px auto;
+    color: #fff;
+  }
+
+  .label {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  select {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+  }
+
+  .viewer {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    overflow: auto;
+  }
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
+    width: auto;
+    border-radius: 0px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  }
+
+  /* responsive */
+  @media (max-width: 1000px) {
+    .header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .label {
+      font-size: 18px;
+    }
+    select {
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+  document.getElementById("sourceSelect").addEventListener("change", function () {
+    const viewer = document.getElementById("viewer");
+    if (this.value) {
+      viewer.src = this.value;
+      viewer.style.display = "block";
+    } else {
+      viewer.src = "";
+      viewer.style.display = "none";
+    }
+  });
+</script>
+
+
+  <!-- Footer -->
+  <div class="footer">
+    VERSION: 19.02.3Q PUBLISHED ON 020925<br>
+    CREATED BY RESEARCH AND DEVELOPMENT TEAM (RDD)<br>
+    THIS SITE MAINTAIN BY SYSTEM SERVERS BY ©TYMO_ALDRIN<br>
+    ALL RIGHTS RESERVED CWI-CABUYAO 2025-2026
+  </div>
+
+  <!-- Script -->
+  <script>
+    function updateTime() {
+      const now = new Date();
+      const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+      document.getElementById('date').textContent = now.toLocaleDateString('en-US', options);
+      document.getElementById('time').textContent = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    }
+    setInterval(updateTime, 1000);
+    updateTime();
+
+    function openMenu() {
+      document.getElementById("sideMenu").style.width = "250px";
+    }
+    function closeMenu() {
+      document.getElementById("sideMenu").style.width = "0";
+    }
+  </script>
+</body>
+</html>
