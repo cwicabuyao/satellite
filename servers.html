@@ -285,50 +285,10 @@
   }
 </style>
 
-<script>
-  document.getElementById("sourceSelect").addEventListener("change", function () {
-    const viewer = document.getElementById("viewer");
-    if (this.value) {
-      viewer.src = this.value;
-      viewer.style.display = "block";
-    } else {
-      viewer.src = "";
-      viewer.style.display = "none";
-    }
-  });
-</script>
-
-
-  <!-- Footer -->
-  <div class="footer">
-    VERSION: 19.02.3Q PUBLISHED ON 020925<br>
-    CREATED BY RESEARCH AND DEVELOPMENT TEAM (RDD)<br>
-    THIS SITE MAINTAIN BY SYSTEM SERVERS BY ©TYMO_ALDRIN<br>
-    ALL RIGHTS RESERVED CWI-CABUYAO 2025-2026
-  </div>
-
-  <!-- Script -->
-  <script>
-    function updateTime() {
-      const now = new Date();
-      const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
-      document.getElementById('date').textContent = now.toLocaleDateString('en-US', options);
-      document.getElementById('time').textContent = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-    }
-    setInterval(updateTime, 1000);
-    updateTime();
-
-    function openMenu() {
-      document.getElementById("sideMenu").style.width = "250px";
-    }
-    function closeMenu() {
-      document.getElementById("sideMenu").style.width = "0";
-    }
-  </script>
 
 
 
-  
+
   <!-- Image Zoom Modal -->
 <div id="imgModal" class="img-modal">
   <span class="close">&times;</span>
@@ -401,6 +361,54 @@
     color: #f00;
   }
 </style>
+
+
+
+
+
+
+
   
+
+<script>
+  document.getElementById("sourceSelect").addEventListener("change", function () {
+    const viewer = document.getElementById("viewer");
+    if (this.value) {
+      viewer.src = this.value;
+      viewer.style.display = "block";
+    } else {
+      viewer.src = "";
+      viewer.style.display = "none";
+    }
+  });
+</script>
+
+
+  <!-- Footer -->
+  <div class="footer">
+    VERSION: 19.02.3Q PUBLISHED ON 020925<br>
+    CREATED BY RESEARCH AND DEVELOPMENT TEAM (RDD)<br>
+    THIS SITE MAINTAIN BY SYSTEM SERVERS BY ©TYMO_ALDRIN<br>
+    ALL RIGHTS RESERVED CWI-CABUYAO 2025-2026
+  </div>
+
+  <!-- Script -->
+  <script>
+    function updateTime() {
+      const now = new Date();
+      const options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' };
+      document.getElementById('date').textContent = now.toLocaleDateString('en-US', options);
+      document.getElementById('time').textContent = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    }
+    setInterval(updateTime, 1000);
+    updateTime();
+
+    function openMenu() {
+      document.getElementById("sideMenu").style.width = "250px";
+    }
+    function closeMenu() {
+      document.getElementById("sideMenu").style.width = "0";
+    }
+  </script>
 </body>
 </html>
